@@ -1,0 +1,42 @@
+#/bin/sh
+#MHS_LIMIT=2550
+MHS_LIMIT=255000
+LOG=/var/log/bfgminermonitor.log
+STATUSF=/var/run/bfgminer.status
+STATUS=0
+RETRY_LIMIT=3
+
+MHS_NOW=`/usr/bin/bfgminer-rpc summary 127.0.0.1 4028 | grep '  \[MHS 5s\]' | awk -F\> '{ print $2 }'| sed 's/\..*$//' `
+
+  
+if [ -f  "$STATUSF" ]
+then 
+   STATUS=`cat $STATUSF`
+else
+  echo -n $STATUS > $STATUSF
+fi
+
+if  [ "$MHS_NOW" -gt "$MHS_LIMIT" ]   
+then 
+   if [ "$STATUS" -gt "0" ]                                                         
+   then 
+   
+      echo -n "0" > $STATUSF
+   fi
+else
+  STATUS=$((STATUS+1))
+  
+  echo "[`date`] bfgminer failed $STATUS times, get $MHS_NOW expected upper $MHS_LIMIT" >> $LOG
+  if [ "$STATUS" -gt "$RETRY_LIMIT" ]
+  then
+    echo "[`date`] bfgminer failed $STATUS times, the limit "$RETRY_LIMIT" is exceded, rebooting the system" >> $LOG
+    STATUS=0
+    echo -n $STATUS > $STATUSF
+    /sbin/reboot
+  else
+    echo -n $STATUS > $STATUSF
+    /etc/init.d/bfgminer stop
+    sleep 5
+    /etc/init.d/bfgminer start
+  fi
+fi

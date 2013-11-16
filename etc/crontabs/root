@@ -1,0 +1,10 @@
+##############################################################################
+#                                                                            #
+#    OpenWrtMiner:  Bitcoin Miner based in OpenWrt capable AP and Routers    #
+#                        V 0.1.0 - 2013 / 11 / 16                            #
+#                             Root Crontab                                   #
+#                                                                            #
+##############################################################################
+# m h dom mon dow user  command
+*/5   *   *   *   * /usr/local/bin/bfgminer.cron
+
