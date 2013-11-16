@@ -1,6 +1,33 @@
-#/bin/sh
-#MHS_LIMIT=2550
-MHS_LIMIT=255000
+#!/bin/sh
+###############################################################################
+#                                                                            #
+#    OpenWrtMiner:  Bitcoin Miner based in OpenWrt capable AP and Routers    #
+#                        V 0.1.0 - 2013 / 11 / 16                            #
+#                                                                            #
+##############################################################################
+#                                                                            #
+#    Copyright 2013 Daniel San Miguel IoXoI < ioxoi /a/ downby /·/ net >     #
+#                                                                            #
+#    This file is part of OpenWrtMiner.                                      #
+#                                                                            #
+#    OpenWrtMiner is free software: you can redistribute it and/or modify it #
+#    under the terms of the GNU General Public License as published by the   #
+#    Free Software Foundation, either version 3 of the License, or (at your  #
+#    option) any later version.                                              #
+#                                                                            #
+#    OpenWrtMiner is distributed in the hope that it will be useful, but     #
+#    WITHOUT ANY WARRANTY; without even the implied warranty of              #
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU        #
+#    General Public License for more details.                                #
+#                                                                            #
+#    You should have received a copy of the GNU General Public License along #
+#    with OpenWrtMiner. If not, see http://www.gnu.org/licenses/.            #
+#                                                                            #
+#                                                                            #
+##############################################################################
+#Please change with your MHS, for a 60GH little, 55000 is a good value.
+#MHS_LIMIT=55000
+MHS_LIMIT=0
 LOG=/var/log/bfgminermonitor.log
 STATUSF=/var/run/bfgminer.status
 STATUS=0
